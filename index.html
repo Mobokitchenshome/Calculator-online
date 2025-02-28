@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator Mobilier</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculator Mobilier la Comandă</h1>
+        <form id="calculator">
+            <div class="form-group">
+                <label for="latime">Lățime (cm):</label>
+                <input type="number" id="latime" required>
+            </div>
+            <div class="form-group">
+                <label for="inaltime">Înălțime (cm):</label>
+                <input type="number" id="inaltime" required>
+            </div>
+            <div class="form-group">
+                <label for="adancime">Adâncime (cm):</label>
+                <input type="number" id="adancime" required>
+            </div>
+            <div class="form-group">
+                <label for="material">Material:</label>
+                <select id="material">
+                    <option value="PAL">PAL - 51€/m²</option>
+                    <option value="MDF">MDF - 190€/m²</option>
+                    <option value="Lemn">Lemn Masiv - 300€/m²</option>
+                </select>
+            </div>
+            <button type="button" onclick="calculeaza()">Calculează</button>
+        </form>
+        <h2>Rezultat:</h2>
+        <p id="rezultat"></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
