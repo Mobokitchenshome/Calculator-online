@@ -3,154 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator Mobilier la Comandă</title>
+    <title>Calculator Mobilier</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Calculator Mobilier la Comandă</h1>
-        <form id="calculator">
-            <fieldset>
-                <legend>Blaturi compact 12mm</legend>
-                <div class="input-group">
-                    <label for="blat_fundermax">HPL (4100x1300) Fundermax:</label>
-                    <input type="number" id="blat_fundermax" placeholder="Preț €/listă">
-                    <input type="number" id="cant_blat_fundermax" placeholder="Cantitate">
-                </div>
-                <div class="input-group">
-                    <label for="blat_smart">HPL (4200x1400) Smart:</label>
-                    <input type="number" id="blat_smart" placeholder="Preț €/listă">
-                    <input type="number" id="cant_blat_smart" placeholder="Cantitate">
-                </div>
-                <!-- Adaugă restul câmpurilor pentru Blaturi compact 12mm în mod similar -->
-            </fieldset>
+    <h1>Calculator Mobilier</h1>
 
-            <fieldset>
-                <legend>Brâu compact 12mm</legend>
-                <div class="input-group">
-                    <label for="brau_fundermax">HPL (4100x1300) Fundermax:</label>
-                    <input type="number" id="brau_fundermax" placeholder="Preț €/listă">
-                    <input type="number" id="cant_brau_fundermax" placeholder="Cantitate">
-                </div>
-                <div class="input-group">
-                    <label for="brau_smart">HPL (4200x1400) Smart:</label>
-                    <input type="number" id="brau_smart" placeholder="Preț €/listă">
-                    <input type="number" id="cant_brau_smart" placeholder="Cantitate">
-                </div>
-                <!-- Adaugă restul câmpurilor pentru Brâu compact 12mm în mod similar -->
-            </fieldset>
-
-            <fieldset>
-                <legend>Blaturi Egger</legend>
-                <div class="input-group">
-                    <label for="blat_egger_pal">Blat Egger (4100x600) PAL:</label>
-                    <input type="number" id="blat_egger_pal" placeholder="Preț €/listă">
-                    <input type="number" id="cant_blat_egger_pal" placeholder="Cantitate">
-                </div>
-                <div class="input-group">
-                    <label for="brau_egger_pal">Brâu Egger PAL:</label>
-                    <input type="number" id="brau_egger_pal" placeholder="Preț €/listă">
-                    <input type="number" id="cant_brau_egger_pal" placeholder="Cantitate">
-                </div>
-                <!-- Adaugă restul câmpurilor pentru Blaturi Egger în mod similar -->
-            </fieldset>
-
-            <fieldset>
-                <legend>Carcasa (m²)</legend>
-                <div class="input-group">
-                    <label for="carcasa_egger">Egger:</label>
-                    <input type="number" id="carcasa_egger" placeholder="Preț €/m²">
-                    <input type="number" id="cant_carcasa_egger" placeholder="Cantitate m²">
-                </div>
-                <div class="input-group">
-                    <label for="carcasa_krono">Krono:</label>
-                    <input type="number" id="carcasa_krono" placeholder="Preț €/m²">
-                    <input type="number" id="cant_carcasa_krono" placeholder="Cantitate m²">
-                </div>
-                <!-- Adaugă restul câmpurilor pentru Carcasa în mod similar -->
-            </fieldset>
-
-            <fieldset>
-                <legend>Fronturile (m²)</legend>
-                <div class="input-group">
-                    <label for="front_egger">Egger:</label>
-                    <input type="number" id="front_egger" placeholder="Preț €/m²">
-                    <input type="number" id="cant_front_egger" placeholder="Cantitate m²">
-                </div>
-                <div class="input-group">
-                    <label for="front_cleaf">Cleaf:</label>
-                    <input type="number" id="front_cleaf" placeholder="Preț €/m²">
-                    <input type="number" id="cant_front_cleaf" placeholder="Cantitate m²">
-                </div>
-                <!-- Adaugă restul câmpurilor pentru Fronturile în mod similar -->
-            </fieldset>
-
-            <fieldset>
-                <legend>PFL (m²)</legend>
-                <div class="input-group">
-                    <label for="pfl">PFL Alb/Negru/Antracit:</label>
-                    <input type="number" id="pfl" placeholder="Preț €/m²">
-                    <input type="number" id="cant_pfl" placeholder="Cantitate m²">
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Covorașe (m²)</legend>
-                <div class="input-group">
-                    <label for="covorase">Covorașe ALB/Negru/Antracit:</label>
-                    <input type="number" id="covorase" placeholder="Preț €/m²">
-                    <input type="number" id="cant_covorase" placeholder="Cantitate m²">
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Accesorii (bucată)</legend>
-                <div class="input-group">
-                    <label for="balamale_blum">Balamale Blum:</label>
-                    <input type="number" id="balamale_blum" placeholder="Preț €/bucată">
-                    <input type="number" id="cant_balamale_blum" placeholder="Cantitate">
-                </div>
-                <div class="input-group">
-                    <label for="sertare_blum_antaro">Sertare Blum Antaro:</label>
-                    <input type="number" id="sertare_blum_antaro" placeholder="Preț €/bucată">
-                    <input type="number" id="cant_sertare_blum_antaro" placeholder="Cantitate">
-                </div>
-                <!-- Adaugă restul câmpurilor pentru Accesorii în mod similar -->
-            </fieldset>
-            
-            <!-- Adaugă restul câmpurilor pentru alte categorii în mod similar -->
-
-            <fieldset>
-                <legend>Coeficienți</legend>
-                <div class="input-group">
-                    <label for="coeficient_montatori">Coeficient montatori:</label>
-                    <input type="number" id="coeficient_montatori" placeholder="Coeficient">
-                </div>
-                <div class="input-group">
-                    <label for="coeficient_complicare">Coeficient de complicare:</label>
-                    <input type="number" id="coeficient_complicare" placeholder="Coeficient">
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>TVA și Total</legend>
-                <div class="input-group">
-                    <label for="tva">TVA (%):</label>
-                    <input type="number" id="tva" value="19" placeholder="TVA %">
-                </div>
-                <div class="input-group">
-                    <label for="total_euro">Total în Euro (€):</label>
-                    <input type="number" id="total_euro" readonly>
-                </div>
-                <div class="input-group">
-                    <label for="total_lei">Total în Lei (Lei):</label>
-                    <input type="number" id="total_lei" readonly>
-                </div>
-            </fieldset>
-
-            <button type="button" onclick="calculeazaTotal()">Calculează Total</button>
-        </form>
+    <div id="calculator">
+        <!-- Aici se generează câmpurile din script.js -->
     </div>
+
+    <div id="totaluri">
+        <p>Total în Euro: <span id="totalEuro">0</span> €</p>
+        <p>Total în Lei: <span id="totalLei">0</span> MDL</p>
+    </div>
+
+    <button id="exportPDF">Exportă în PDF</button>
+
     <script src="script.js"></script>
 </body>
 </html>
