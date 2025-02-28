@@ -1,79 +1,180 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const calculator = document.getElementById("calculator");
-    const totalEuro = document.getElementById("totalEuro");
-    const totalLei = document.getElementById("totalLei");
-    const exportPDFButton = document.getElementById("exportPDF");
+let categories = JSON.parse(localStorage.getItem("categories")) || {};
 
-    // Lista materialelor și accesoriilor
-    const items = [
-        { name: "Blat Egger (4100x600) PAL", price: 50 },
-        { name: "Brâu Egger PAL", price: 30 },
-        { name: "Carcasă Egger", price: 40 },
-        { name: "Carcasă Krono", price: 35 },
-        { name: "Front Egger", price: 60 },
-        { name: "Front MDF vopsit", price: 80 },
-        { name: "Balamale Blum", price: 10 },
-        { name: "Sertar Blum Antaro", price: 20 },
-        { name: "LED 1m", price: 15 }
-    ];
+function init() {
+    renderCategories();
+    calculateTotal();
+}
 
-    let selections = [];
+// Generare câmpuri
+function renderCategories() {
+    const container = document.getElementById("categories");
+    container.innerHTML = "";
 
-    function renderCalculator() {
-        calculator.innerHTML = "";
+    for (let category in categories) {
+        let div = document.createElement("div");
+        div.classList.add("category");
 
-        items.forEach((item, index) => {
-            const row = document.createElement("div");
-            row.className = "calculator-row";
+        let titleInput = document.createElement("input");
+        titleInput.type = "text";
+        titleInput.value = category;
+        titleInput.classList.add("category-title");
+        titleInput.onchange = () => editCategoryName(category, titleInput.value);
 
-            const label = document.createElement("label");
-            label.textContent = item.name;
+        let toggleBtn = document.createElement("button");
+        toggleBtn.textContent = "▼";
+        toggleBtn.onclick = () => toggleSubfields(category);
 
-            const input = document.createElement("input");
-            input.type = "number";
-            input.min = 0;
-            input.value = 0;
-            input.dataset.index = index;
+        let deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "✖";
+        deleteBtn.onclick = () => deleteCategory(category);
 
-            input.addEventListener("input", updateTotal);
+        let header = document.createElement("div");
+        header.appendChild(titleInput);
+        header.appendChild(toggleBtn);
+        header.appendChild(deleteBtn);
 
-            row.appendChild(label);
-            row.appendChild(input);
-            calculator.appendChild(row);
+        div.appendChild(header);
 
-            selections.push({ name: item.name, quantity: 0, price: item.price });
+        let subfieldsDiv = document.createElement("div");
+        subfieldsDiv.id = category;
+        subfieldsDiv.classList.add("subfields");
+
+        categories[category].forEach((item, index) => {
+            let label = document.createElement("div");
+
+            let inputName = document.createElement("input");
+            inputName.type = "text";
+            inputName.value = item.name;
+            inputName.classList.add("subfield-name");
+            inputName.onchange = () => editSubfield(category, index, inputName.value);
+
+            let priceInput = document.createElement("input");
+            priceInput.type = "number";
+            priceInput.value = item.price;
+            priceInput.classList.add("price-input");
+            priceInput.oninput = () => {
+                categories[category][index].price = parseFloat(priceInput.value) || 0;
+                saveCategories();
+                calculateTotal();
+            };
+
+            let quantityInput = document.createElement("input");
+            quantityInput.type = "number";
+            quantityInput.value = item.quantity || 1;
+            quantityInput.classList.add("quantity-input");
+            quantityInput.oninput = () => {
+                categories[category][index].quantity = parseFloat(quantityInput.value) || 1;
+                saveCategories();
+                calculateTotal();
+            };
+
+            let unitSelect = document.createElement("select");
+            unitSelect.classList.add("unit-select");
+            unitSelect.innerHTML = `
+                <option value="buc" ${item.unit === "buc" ? "selected" : ""}>buc</option>
+                <option value="m²" ${item.unit === "m²" ? "selected" : ""}>m²</option>
+            `;
+            unitSelect.onchange = () => {
+                categories[category][index].unit = unitSelect.value;
+                saveCategories();
+                calculateTotal();
+            };
+
+            let deleteSubBtn = document.createElement("button");
+            deleteSubBtn.textContent = "✖";
+            deleteSubBtn.onclick = () => deleteSubfield(category, index);
+
+            label.appendChild(inputName);
+            label.appendChild(priceInput);
+            label.appendChild(quantityInput);
+            label.appendChild(unitSelect);
+            label.appendChild(deleteSubBtn);
+            subfieldsDiv.appendChild(label);
+        });
+
+        let addSubBtn = document.createElement("button");
+        addSubBtn.textContent = "+ Adaugă subcâmp";
+        addSubBtn.onclick = () => addSubfield(category);
+
+        subfieldsDiv.appendChild(addSubBtn);
+        div.appendChild(subfieldsDiv);
+        container.appendChild(div);
+    }
+}
+
+// Afișare/ascundere subcâmpuri
+function toggleSubfields(id) {
+    let element = document.getElementById(id);
+    element.style.display = element.style.display === "none" ? "block" : "none";
+}
+
+// Adăugare categorie nouă
+function addCategory() {
+    let name = prompt("Introduceți numele categoriei:");
+    if (name && !categories[name]) {
+        categories[name] = [];
+        saveCategories();
+        renderCategories();
+    }
+}
+
+// Editare nume categorie
+function editCategoryName(oldName, newName) {
+    if (newName && oldName !== newName && !categories[newName]) {
+        categories[newName] = categories[oldName];
+        delete categories[oldName];
+        saveCategories();
+        renderCategories();
+    }
+}
+
+// Ștergere categorie
+function deleteCategory(category) {
+    delete categories[category];
+    saveCategories();
+    renderCategories();
+}
+
+// Adăugare subcâmp
+function addSubfield(category) {
+    let name = prompt("Introduceți numele subcâmpului:");
+    if (name) {
+        categories[category].push({ name, price: 0, quantity: 1, unit: "buc" });
+        saveCategories();
+        renderCategories();
+    }
+}
+
+// Editare subcâmp
+function editSubfield(category, index, newName) {
+    categories[category][index].name = newName;
+    saveCategories();
+}
+
+// Ștergere subcâmp
+function deleteSubfield(category, index) {
+    categories[category].splice(index, 1);
+    saveCategories();
+    renderCategories();
+}
+
+// Salvare date
+function saveCategories() {
+    localStorage.setItem("categories", JSON.stringify(categories));
+}
+
+// Calcul totaluri
+function calculateTotal() {
+    let totalEuro = 0;
+    for (let category in categories) {
+        categories[category].forEach(item => {
+            totalEuro += item.price * item.quantity;
         });
     }
+    
+    document.getElementById("total-euro").textContent = totalEuro.toFixed(2);
+    document.getElementById("total-lei").textContent = (totalEuro * 19).toFixed(2);
+}
 
-    function updateTotal() {
-        let total = 0;
-        selections.forEach((item, index) => {
-            const input = document.querySelector(`input[data-index="${index}"]`);
-            const quantity = parseFloat(input.value) || 0;
-            selections[index].quantity = quantity;
-            total += quantity * item.price;
-        });
-
-        totalEuro.textContent = total.toFixed(2);
-        totalLei.textContent = (total * 19).toFixed(2);
-    }
-
-    exportPDFButton.addEventListener("click", function () {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        doc.text("Ofertă Mobilier", 10, 10);
-
-        let y = 20;
-        selections.forEach(item => {
-            if (item.quantity > 0) {
-                doc.text(`${item.name}: ${item.quantity} x ${item.price}€ = ${(item.quantity * item.price).toFixed(2)}€`, 10, y);
-                y += 10;
-            }
-        });
-
-        doc.text(`Total: ${totalEuro.textContent}€ / ${totalLei.textContent} MDL`, 10, y + 10);
-        doc.save("oferta_mobilier.pdf");
-    });
-
-    renderCalculator();
-});
+// Inițializare
+document.addEventListener("DOMContentLoaded", init);
