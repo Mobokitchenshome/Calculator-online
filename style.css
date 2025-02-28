@@ -1,89 +1,33 @@
 body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f4f4f9;
-}
-
-.container {
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    background-color: #f5f1e9; /* Crem plăcut */
+    color: #333;
+    text-align: center;
 }
 
 h1 {
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
+    color: #2c7a2c; /* Verde plăcut */
 }
 
-fieldset {
-    margin-bottom: 20px;
+#calculator {
+    max-width: 800px;
+    margin: 20px auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-}
-
-legend {
-    font-weight: bold;
-    color: #555;
-    padding: 0 10px;
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-label {
-    margin-bottom: 5px;
-    color: #555;
-}
-
-input, select, button {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-input:focus, select:focus, button:focus {
-    outline: none;
-    border-color: #007bff;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 button {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #2c7a2c;
+    color: white;
+    padding: 10px 20px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s;
+    margin-top: 10px;
+    border-radius: 5px;
 }
 
 button:hover {
-    background-color: #0056b3;
-}
-
-button:active {
-    background-color: #00408d;
-}
-
-h2 {
-    color: #333;
-    margin-top: 20px;
-    text-align: center;
-}
-
-p#rezultat {
-    background-color: #e9ecef;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    text-align: center;
+    background-color: #245d24;
 }
